@@ -1,0 +1,12 @@
+[Unit]
+Description=Local container registry (registry:2) via Podman Quadlet
+RestartPolicy=always
+After=network.target
+
+[Container]
+Image=docker.io/registry:2
+PublishPort=5000:5000
+Volume=/var/lib/registry:/var/lib/registry
+
+[Install]
+WantedBy=default.target
