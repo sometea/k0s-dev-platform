@@ -19,4 +19,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - your-node-name  # <-- Replace this
+                - ubuntu-4gb-hel1-2  # <-- Replace this

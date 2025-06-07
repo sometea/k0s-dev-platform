@@ -23,7 +23,7 @@ k0s install controller --single
 k0s start
 
 # wait for k0s to be ready
-while ! k0s status | grep -q "k0s is running"; do
+while ! k0s status | grep -q "Kube-api probing successful: true"; do
     echo "Waiting for k0s to be ready..."
     sleep 5
 done
