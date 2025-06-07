@@ -29,6 +29,6 @@ spec:
       volumes:
         - name: my-data
           persistentVolumeClaim:
-            claimName: my-local-pv
+            claimName: my-local-pvc
       nodeSelector:
         kubernetes.io/hostname: ubuntu-4gb-hel1-2  # <-- replace this
