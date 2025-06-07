@@ -12,6 +12,7 @@ packages:
   - postgresql-contrib
   - podman
   - unattended-upgrades
+  - git
 package_update: true
 package_upgrade: true
 runcmd:
