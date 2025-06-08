@@ -40,5 +40,6 @@ done
 
 k0s kubectl -n ingress-nginx annotate ingressclasses nginx ingressclass.kubernetes.io/is-default-class="true"
 
-k0s kubectl apply -f workloads/volume/local.yaml
+k0s kubectl apply -f workloads/volume/
 
+k0s kubectl apply -f workloads/demo/
