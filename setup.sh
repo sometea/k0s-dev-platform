@@ -13,6 +13,7 @@
 # Create Postgres user and database
 sudo -u postgres psql -c "CREATE USER strapi WITH PASSWORD 'strapi';"
 sudo -u postgres psql -c "CREATE DATABASE strapi OWNER strapi;"
+sudo -u postgres psql -d strapi -c "GRANT ALL ON SCHEMA public TO strapi;"
 
 # Set up a data directory for local volumes
 mkdir -p /var/data
@@ -29,7 +30,7 @@ while ! k0s status | grep -q "Kube-api probing successful: true"; do
 done
 
 # Install NGINX ingress controller
-k0s kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.3/deploy/static/provider/baremetal/deploy.yaml
+k0s kubectl apply -f ingress-nginx.yaml
 
 # Wait for NGINX ingress controller to be ready
 while ! k0s kubectl get pods -n ingress-nginx | grep -q "1/1"; do
