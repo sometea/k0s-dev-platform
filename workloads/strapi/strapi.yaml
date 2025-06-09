@@ -20,21 +20,22 @@ spec:
         app: strapi
     spec:
       containers:
-      env:
-        - name: DATABSE_CLIENT
-          value: "postgres"
-        - name: DATABASE_PORT
-          value: "5432"
-        - name: DATABASE_NAME
-          value: "strapi"
-        - name: DATABASE_USERNAME
-          value: "strapi"
-        - name: DATABASE_PASSWORD
-          value: "strapi"
         - name: strapi
+          env:
+          - name: DATABSE_CLIENT
+            value: "postgres"
+          - name: DATABASE_PORT
+            value: "5432"
+          - name: DATABASE_NAME
+            value: "strapi"
+          - name: DATABASE_USERNAME
+            value: "strapi"
+          - name: DATABASE_PASSWORD
+            value: "strapi"
+          - name: strapi
           image: ghcr.io/sometea/hobbymusik-strapi:latest
           ports:
-            - containerPort: 1337
+          - containerPort: 1337
 
 ---
 apiVersion: v1
