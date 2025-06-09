@@ -27,7 +27,7 @@ spec:
           - name: DATABASE_PORT
             value: "5432"
           - name: DATABASE_HOST
-            value: "postgres"
+            value: "postgres.default.svc.cluster.local"
           - name: DATABASE_NAME
             value: "strapi"
           - name: DATABASE_USERNAME
