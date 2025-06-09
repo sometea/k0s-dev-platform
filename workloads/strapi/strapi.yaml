@@ -22,7 +22,7 @@ spec:
       containers:
         - name: strapi
           env:
-          - name: DATABSE_CLIENT
+          - name: DATABASE_CLIENT
             value: "postgres"
           - name: DATABASE_PORT
             value: "5432"
