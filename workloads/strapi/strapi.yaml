@@ -72,7 +72,8 @@ spec:
     - http:
         paths:
           - path: /strapi
-            pathType: Prefix
+            pathRewrite:
+              "^/strapi": "/"
             backend:
               service:
                 name: strapi-service
