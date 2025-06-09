@@ -37,7 +37,7 @@ spec:
           persistentVolumeClaim:
             claimName: my-local-pvc
       nodeSelector:
-        kubernetes.io/hostname: devplatform-k0s  # <-- replace this
+        kubernetes.io/hostname: devplatform01  # <-- replace this
 ---
 apiVersion: v1
 kind: Service

@@ -19,4 +19,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - devplatform-k0s  # <-- Replace this
+                - devplatform01  # <-- Replace this
