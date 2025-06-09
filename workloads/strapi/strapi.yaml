@@ -67,13 +67,11 @@ kind: Ingress
 metadata:
   name: strapi
   namespace: strapi
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - http:
         paths:
-          - path: /strapi(/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
