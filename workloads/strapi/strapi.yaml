@@ -36,6 +36,12 @@ spec:
             value: "strapi"
           - name: APP_KEYS
             value: "toBeModified1,toBeModified2"
+          - name: JWT_SECRET
+            value: "toBeModified3"
+          - name: API_TOKEN_SALT
+            value: "toBeModified4"
+          - name: ADMIN_JWT_SECRET
+            value: "toBeModified5"
           image: ghcr.io/sometea/hobbymusik-strapi:latest
           ports:
           - containerPort: 1337
