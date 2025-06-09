@@ -26,13 +26,16 @@ spec:
             value: "postgres"
           - name: DATABASE_PORT
             value: "5432"
+          - name: DATABASE_HOST
+            value: "157.180.95.35"
           - name: DATABASE_NAME
             value: "strapi"
           - name: DATABASE_USERNAME
             value: "strapi"
           - name: DATABASE_PASSWORD
             value: "strapi"
-          - name: strapi
+          - name: APP_KEYS
+            value: "toBeModified1,toBeModified2"
           image: ghcr.io/sometea/hobbymusik-strapi:latest
           ports:
           - containerPort: 1337
