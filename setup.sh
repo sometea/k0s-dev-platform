@@ -40,6 +40,9 @@ done
 
 k0s kubectl -n ingress-nginx annotate ingressclasses nginx ingressclass.kubernetes.io/is-default-class="true"
 
+# Apply the workloads
+k0s kubectl apply -f workloads/postgres-service/
 k0s kubectl apply -f workloads/volume/
-
 k0s kubectl apply -f workloads/demo/
+
+
