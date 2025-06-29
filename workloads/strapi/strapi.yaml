@@ -18,6 +18,19 @@ stringData:
   API_TOKEN_SALT: "toBeModified4"
   ADMIN_JWT_SECRET: "toBeModified5"
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: strapi-pvc
+  namespace: strapi
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 5Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -77,7 +90,15 @@ spec:
           image: ghcr.io/sometea/hobbymusik-strapi:latest
           ports:
           - containerPort: 1337
-
+          volumeMounts:
+            - name: strapi-data
+              mountPath: /opt/app/public/uploads
+      volumes:
+        - name: strapi-data
+          persistentVolumeClaim:
+            claimName: strapi-pvc
+      nodeSelector:
+        kubernetes.io/hostname: devplatform01    
 ---
 apiVersion: v1
 kind: Service
