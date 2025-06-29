@@ -10,6 +10,10 @@
 # apt install -y unattended-upgrades
 # systemctl enable --now unattended-upgrades
 
+# Edit postgresql.conf to allow local connections
+sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/16/main/postgresql.conf
+systemctl restart postgresql
+
 # Create Postgres user and database
 sudo -u postgres psql -c "CREATE USER strapi WITH PASSWORD 'strapi';"
 sudo -u postgres psql -c "CREATE DATABASE strapi OWNER strapi;"

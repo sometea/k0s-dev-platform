@@ -4,6 +4,20 @@ metadata:
   name: strapi
 
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: strapi-secrets
+  namespace: strapi
+type: Opaque
+stringData:
+  DATABASE_USERNAME: "strapi"
+  DATABASE_PASSWORD: "strapi"
+  APP_KEYS: "toBeModified1,toBeModified2"
+  JWT_SECRET: "toBeModified3"
+  API_TOKEN_SALT: "toBeModified4"
+  ADMIN_JWT_SECRET: "toBeModified5"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,17 +45,35 @@ spec:
           - name: DATABASE_NAME
             value: "strapi"
           - name: DATABASE_USERNAME
-            value: "strapi"
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: DATABASE_USERNAME
           - name: DATABASE_PASSWORD
-            value: "strapi"
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: DATABASE_PASSWORD
           - name: APP_KEYS
-            value: "toBeModified1,toBeModified2"
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: APP_KEYS
           - name: JWT_SECRET
-            value: "toBeModified3"
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: JWT_SECRET
           - name: API_TOKEN_SALT
-            value: "toBeModified4"
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: API_TOKEN_SALT
           - name: ADMIN_JWT_SECRET
-            value: "toBeModified5"
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: ADMIN_JWT_SECRET
           image: ghcr.io/sometea/hobbymusik-strapi:latest
           ports:
           - containerPort: 1337
