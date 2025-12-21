@@ -7,6 +7,7 @@ After=network.target
 Image=docker.io/registry:2
 PublishPort=5000:5000
 Volume=/var/lib/registry:/var/lib/registry
+NetHost=yes
 
 [Install]
 WantedBy=default.target

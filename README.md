@@ -16,5 +16,4 @@ Currently, the IP address of the server is hardcoded in the following files and 
 
 The name of the server ("devplatform01") has to be changed in the following files:
 
-- workloads/volume/local.yaml
 - workloads/demo/demo-workload.yaml

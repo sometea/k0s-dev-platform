@@ -5,7 +5,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-      - <public_ssh_key>
+      - add public key here
 packages:
   - fail2ban
   - postgresql

@@ -87,7 +87,7 @@ spec:
               secretKeyRef:
                 name: strapi-secrets
                 key: ADMIN_JWT_SECRET
-          image: ghcr.io/sometea/hobbymusik-strapi:latest
+          image: localhost:5000/hobbymusik-strapi:latest
           ports:
           - containerPort: 1337
           volumeMounts:

@@ -47,11 +47,14 @@ done
 k0s kubectl -n ingress-nginx annotate ingressclasses nginx ingressclass.kubernetes.io/is-default-class="true"
 
 # Install CSI local path provisionier
-k0s kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/sig-storage-local-static-provisioner/master/deploy/local-path-storage.yaml
+k0s kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 k0s kubectl apply -f workloads/storage/
 
+# Install the Sealed Secrets controller
+k0s kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.34.0/controller.yaml
+
 # Apply the workloads
-k0s kubectl apply -f workloads/volume/
+k0s kubectl apply -f workloads/storage
 k0s kubectl apply -f workloads/demo/
 
 
