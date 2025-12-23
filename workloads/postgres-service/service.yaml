@@ -23,4 +23,4 @@ ports:
     port: 5432
 endpoints:
   - addresses:
-      - 157.180.95.35  # <-- replace with IP of the machine
+      - 65.109.226.54  # <-- replace with IP of the machine
