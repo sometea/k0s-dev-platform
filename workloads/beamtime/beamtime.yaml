@@ -46,13 +46,14 @@ metadata:
   name: beamtime-ingress
   namespace: beamtime
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - http:
         paths:
-          - path: /beamtime
-            pathType: Prefix
+          - path: /beamtime(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: beamtime-service
