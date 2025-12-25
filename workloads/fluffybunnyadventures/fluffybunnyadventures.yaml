@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fluffybunnyadventures
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fluffybunnyadventures
+  namespace: fluffybunnyadventures
+  labels:
+    app: fluffybunnyadventures
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fluffybunnyadventures
+  template:
+    metadata:
+      labels:
+        app: fluffybunnyadventures
+    spec:
+      containers:
+        - name: fluffybunnyadventures
+          image: localhost:5000/fluffybunnyadventures:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fluffybunnyadventures-service
+  namespace: fluffybunnyadventures
+spec:
+  selector:
+    app: fluffybunnyadventures
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fluffybunnyadventures-ingress
+  namespace: fluffybunnyadventures
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /fluffybunnyadventures(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: fluffybunnyadventures-service
+                port:
+                  number: 80
