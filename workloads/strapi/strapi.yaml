@@ -118,14 +118,17 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: strapi
+  name: strapi-ingress
   namespace: strapi
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /strapi(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: strapi-service
