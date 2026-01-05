@@ -24,7 +24,7 @@ spec:
         - name: hobbymusik
           env:
           - name: STRAPI_PUBLIC_BASE_URL
-            value: "https://cms.beamtime.net"
+            value: "https://backoffice.hobbymusik.net"
           - name: STRAPI_BASE_URL
             value: "http://strapi-service.strapi"
           - name: STRAPI_TOKEN
