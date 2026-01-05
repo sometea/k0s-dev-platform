@@ -22,6 +22,16 @@ spec:
     spec:
       containers:
         - name: hobbymusik
+          env:
+          - name: STRAPI_PUBLIC_BASE_URL
+            value: "https://cms.beamtime.net"
+          - name: STRAPI_BASE_URL
+            value: "http://strapi-service.strapi"
+          - name: STRAPI_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: hobbymusik-secrets
+                key: STRAPI_TOKEN
           image: localhost:5000/hobbymusik:latest
           ports:
             - containerPort: 3000

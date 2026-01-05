@@ -72,6 +72,11 @@ spec:
               secretKeyRef:
                 name: strapi-secrets
                 key: ADMIN_JWT_SECRET
+          - name: ENCRYPTION_KEY
+            valueFrom:
+              secretKeyRef:
+                name: strapi-secrets
+                key: ENCRYPTION_KEY
           image: localhost:5000/hobbymusik-strapi:latest
           ports:
           - containerPort: 1337
