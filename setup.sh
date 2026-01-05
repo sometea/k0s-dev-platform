@@ -56,6 +56,5 @@ k0s kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/dow
 # Apply the workloads
 k0s kubectl apply -f workloads/postgres-service
 k0s kubectl apply -f workloads/storage
-k0s kubectl apply -f workloads/demo/
 
 
