@@ -47,15 +47,17 @@ kind: Ingress
 metadata:
   name: collabora
   namespace: collabora
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: collabora.example.com
-    http:
-      paths:
-      - path: /collabora(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: collabora
-            port:
-              number: 9980
+    - http:
+        paths:
+        - path: /collabora(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: collabora
+              port:
+                number: 9980
