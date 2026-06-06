@@ -33,8 +33,8 @@ done
 
 # Step 5: Run garbage collection using Podman
 echo "Running garbage collection..."
-podman stop registry
+podman stop systemd-registry
 podman run --rm --entrypoint /bin/registry docker.io/library/registry:2 garbage-collect /etc/docker/registry/config.yml
-podman start registry
+podman start systemd-registry
 
 echo "Cleanup complete."

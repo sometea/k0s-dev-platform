@@ -13,6 +13,7 @@ packages:
   - podman
   - unattended-upgrades
   - git
+  - jq
 package_update: true
 package_upgrade: true
 runcmd:
