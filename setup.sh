@@ -75,12 +75,10 @@ k0s kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/dow
 # Apply the workloads
 k0s kubectl apply -f workloads/postgres-service
 k0s kubectl apply -f workloads/storage
-
-# Apply Gateway API routes for all applications
-k0s kubectl apply -f workloads/beamtime/gateway-route.yaml
-k0s kubectl apply -f workloads/demo/gateway-route.yaml
-k0s kubectl apply -f workloads/fluffybunnyadventures/gateway-route.yaml
-k0s kubectl apply -f workloads/hobbymusik/gateway-route.yaml
-k0s kubectl apply -f workloads/strapi/gateway-route.yaml
+k0s kubectl apply -f workloads/beamtime
+k0s kubectl apply -f workloads/demo
+k0s kubectl apply -f workloads/fluffybunnyadventures
+k0s kubectl apply -f workloads/hobbymusik
+k0s kubectl apply -f workloads/strapi
 
 
