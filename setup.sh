@@ -42,7 +42,8 @@ k0s kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/lat
 sleep 10
 
 # Install NGINX Gateway Fabric
-k0s kubectl apply -f https://github.com/nginxinc/nginx-gateway-fabric/releases/download/v1.4.0/manifests.yaml
+k0s kubectl create namespace nginx-gateway
+k0s kubectl kustomize "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.6.7" | k0s kubectl apply -f -
 
 # Patch the deployment to use hostNetwork for port 80/443 binding
 k0s kubectl patch deployment -n nginx-gateway-fabric nginx-gateway-fabric --type=json \
