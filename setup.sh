@@ -61,6 +61,10 @@ done
 k0s kubectl apply -f gateway-class.yaml
 k0s kubectl apply -f gateway.yaml
 
+# Generate and apply TLS certificate for Gateway
+./generate-tls-cert.sh
+k0s kubectl apply -f tls-certificate.yaml
+
 # Install CSI local path provisionier
 k0s kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 k0s kubectl apply -f workloads/storage/
