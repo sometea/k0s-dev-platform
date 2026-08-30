@@ -35,16 +35,31 @@ while ! k0s status | grep -q "Kube-api probing successful: true"; do
     sleep 5
 done
 
-# Install NGINX ingress controller
-k0s kubectl apply -f ingress-nginx.yaml
+# Install Gateway API CRDs
+k0s kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
 
-# Wait for NGINX ingress controller to be ready
-while ! k0s kubectl get pods -n ingress-nginx | grep -q "1/1"; do
-    echo "Waiting for NGINX ingress controller to be ready..."
+# Wait for Gateway API CRDs to be ready
+sleep 10
+
+# Install NGINX Gateway Fabric
+k0s kubectl apply -f https://github.com/nginxinc/nginx-gateway-fabric/releases/download/v1.4.0/manifests.yaml
+
+# Patch the deployment to use hostNetwork for port 80/443 binding
+k0s kubectl patch deployment -n nginx-gateway-fabric nginx-gateway-fabric --type=json \
+  -p='[{"op": "add", "path": "/spec/template/spec/hostNetwork", "value": true}]'
+
+k0s kubectl patch deployment -n nginx-gateway-fabric nginx-gateway-fabric --type=json \
+  -p='[{"op": "add", "path": "/spec/template/spec/dnsPolicy", "value": "ClusterFirstWithHostNet"}]'
+
+# Wait for NGINX Gateway Fabric to be ready
+while ! k0s kubectl get pods -n nginx-gateway-fabric | grep -q "1/1"; do
+    echo "Waiting for NGINX Gateway Fabric to be ready..."
     sleep 5
 done
 
-k0s kubectl -n ingress-nginx annotate ingressclasses nginx ingressclass.kubernetes.io/is-default-class="true"
+# Apply Gateway configuration
+k0s kubectl apply -f gateway-class.yaml
+k0s kubectl apply -f gateway.yaml
 
 # Install CSI local path provisionier
 k0s kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
@@ -56,5 +71,12 @@ k0s kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/dow
 # Apply the workloads
 k0s kubectl apply -f workloads/postgres-service
 k0s kubectl apply -f workloads/storage
+
+# Apply Gateway API routes for all applications
+k0s kubectl apply -f workloads/beamtime/gateway-route.yaml
+k0s kubectl apply -f workloads/demo/gateway-route.yaml
+k0s kubectl apply -f workloads/fluffybunnyadventures/gateway-route.yaml
+k0s kubectl apply -f workloads/hobbymusik/gateway-route.yaml
+k0s kubectl apply -f workloads/strapi/gateway-route.yaml
 
 
