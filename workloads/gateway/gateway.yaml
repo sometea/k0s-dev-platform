@@ -26,5 +26,5 @@ spec:
             kind: Secret
             group: ""
   addresses:
-    - type: Hostname
-      value: "*"
+    - type: IPAddress
+      value: 0.0.0.0/0
