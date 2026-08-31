@@ -2,7 +2,7 @@
 # Generate self-signed TLS certificate for Gateway API
 # This script creates a self-signed certificate valid for the server's IP and common hostnames
 
-NAMESPACE="nginx-gateway-fabric"
+NAMESPACE="nginx-gateway"
 SECRET_NAME="gateway-tls"
 DAYS=3650
 

@@ -2,7 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: nginx-gateway
-  namespace: nginx-gateway-fabric
+  namespace: nginx-gateway
 spec:
   gatewayClassName: nginx-gateway-fabric
   listeners:
@@ -22,7 +22,7 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: gateway-tls
-            namespace: nginx-gateway-fabric
+            namespace: nginx-gateway
             kind: Secret
             group: ""
   addresses:

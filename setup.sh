@@ -46,14 +46,14 @@ k0s kubectl create namespace nginx-gateway
 k0s kubectl kustomize "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.6.7" | k0s kubectl apply -f -
 
 # Patch the deployment to use hostNetwork for port 80/443 binding
-k0s kubectl patch deployment -n nginx-gateway-fabric nginx-gateway-fabric --type=json \
+k0s kubectl patch deployment -n nginx-gateway nginx-gateway-fabric --type=json \
   -p='[{"op": "add", "path": "/spec/template/spec/hostNetwork", "value": true}]'
 
-k0s kubectl patch deployment -n nginx-gateway-fabric nginx-gateway-fabric --type=json \
+k0s kubectl patch deployment -n nginx-gateway nginx-gateway-fabric --type=json \
   -p='[{"op": "add", "path": "/spec/template/spec/dnsPolicy", "value": "ClusterFirstWithHostNet"}]'
 
 # Wait for NGINX Gateway Fabric to be ready
-while ! k0s kubectl get pods -n nginx-gateway-fabric | grep -q "1/1"; do
+while ! k0s kubectl get pods -n nginx-gateway | grep -q "1/1"; do
     echo "Waiting for NGINX Gateway Fabric to be ready..."
     sleep 5
 done
