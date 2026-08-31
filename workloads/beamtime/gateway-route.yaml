@@ -7,13 +7,11 @@ spec:
   parentRefs:
     - name: nginx-gateway
       namespace: nginx-gateway
-  hostnames:
-    - "*"
   rules:
     - matches:
         - path:
-            type: RegularExpression
-            value: /beamtime(/|$)(.*)
+            type: PathPrefix
+            value: /beamtime
       filters:
         - type: URLRewrite
           urlRewrite:
