@@ -25,6 +25,3 @@ spec:
             namespace: nginx-gateway
             kind: Secret
             group: ""
-  addresses:
-    - type: IPAddress
-      value: 0.0.0.0
