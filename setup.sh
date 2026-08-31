@@ -59,8 +59,7 @@ while ! k0s kubectl get pods -n nginx-gateway-fabric | grep -q "1/1"; do
 done
 
 # Apply Gateway configuration
-k0s kubectl apply -f gateway-class.yaml
-k0s kubectl apply -f gateway.yaml
+k0s kubectl apply -f workloads/gateway
 
 # Generate and apply TLS certificate for Gateway
 ./generate-tls-cert.sh
