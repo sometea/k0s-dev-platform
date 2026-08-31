@@ -35,21 +35,20 @@ while ! k0s status | grep -q "Kube-api probing successful: true"; do
     sleep 5
 done
 
-# Install Gateway API CRDs
-k0s kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/latest/download/standard-install.yaml
-
 # Wait for Gateway API CRDs to be ready
 sleep 10
 
 # Install NGINX Gateway Fabric
 k0s kubectl create namespace nginx-gateway
 k0s kubectl kustomize "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.6.7" | k0s kubectl apply -f -
+k0s kubectl apply --server-side -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.6.7/deploy/crds.yaml
+k0s kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.6.7/deploy/default/deploy.yaml
 
 # Patch the deployment to use hostNetwork for port 80/443 binding
-k0s kubectl patch deployment -n nginx-gateway nginx-gateway-fabric --type=json \
+k0s kubectl patch deployment -n nginx-gateway nginx-gateway --type=json \
   -p='[{"op": "add", "path": "/spec/template/spec/hostNetwork", "value": true}]'
 
-k0s kubectl patch deployment -n nginx-gateway nginx-gateway-fabric --type=json \
+k0s kubectl patch deployment -n nginx-gateway nginx-gateway --type=json \
   -p='[{"op": "add", "path": "/spec/template/spec/dnsPolicy", "value": "ClusterFirstWithHostNet"}]'
 
 # Wait for NGINX Gateway Fabric to be ready
