@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script must be run as root to set up port forwarding using ufw
-# from standard ports (80, 443) to NodePorts (3080, 3443)
+# from standard ports (80, 443) to NodePorts (30080, 30443)
 
 if [ "$(id -u)" -ne 0 ]; then
     echo "This script must be run as root" >&2
@@ -13,8 +13,8 @@ sysctl -w net.ipv4.ip_forward=1
 
 # Set up port forwarding rules using ufw
 # First, allow the NodePorts through ufw
-ufw allow 3080/tcp
-ufw allow 3443/tcp
+ufw allow 30080/tcp
+ufw allow 30443/tcp
 
 # Add port forwarding rules before the ufw rules
 # We need to use iptables directly for the NAT rules
