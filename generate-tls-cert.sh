@@ -16,7 +16,7 @@ openssl req -x509 -nodes -days $DAYS -newkey rsa:2048 \
   -addext "subjectAltName=DNS:localhost,DNS:devplatform01,DNS:*.hobbymusik.net,DNS:*.local,IP:127.0.0.1"
 
 # Create Kubernetes secret
-kubectl create secret tls $SECRET_NAME --namespace=$NAMESPACE \
+k0s kubectl create secret tls $SECRET_NAME --namespace=$NAMESPACE \
   --cert=tls.crt --key=tls.key --dry-run=client -o yaml > tls-certificate.yaml
 
 # Clean up temporary files
