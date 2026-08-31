@@ -19,8 +19,8 @@ k0s kubectl patch svc -n nginx-gateway nginx-gateway-nginx -p '{
   "spec": {
     "type": "NodePort",
     "ports": [
-      {"name": "port-80", "port": 80, "targetPort": 80, "nodePort": 3080},
-      {"name": "port-443", "port": 443, "targetPort": 443, "nodePort": 3443},
+      {"name": "port-80", "port": 80, "targetPort": 80, "nodePort": 30080},
+      {"name": "port-443", "port": 443, "targetPort": 443, "nodePort": 30443},
       {"name": "metrics", "port": 9113, "targetPort": 9113}
     ]
   }

@@ -7,13 +7,13 @@ spec:
   gatewayClassName: nginx
   listeners:
     - name: http
-      port: 3080
+      port: 30080
       protocol: HTTP
       allowedRoutes:
         namespaces:
           from: All
     - name: https
-      port: 3443
+      port: 30443
       protocol: HTTPS
       allowedRoutes:
         namespaces:

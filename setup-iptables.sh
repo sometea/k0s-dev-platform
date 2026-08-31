@@ -19,8 +19,8 @@ ufw allow 3443/tcp
 # Add port forwarding rules before the ufw rules
 # We need to use iptables directly for the NAT rules
 # Insert rules at the beginning of the PREROUTING chain to ensure they're processed first
-iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j REDIRECT --to-port 3080
-iptables -t nat -I PREROUTING 2 -p tcp --dport 443 -j REDIRECT --to-port 3443
+iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j REDIRECT --to-port 30080
+iptables -t nat -I PREROUTING 2 -p tcp --dport 443 -j REDIRECT --to-port 30443
 
 # Save iptables rules to ufw's before.rules to make them persistent
 # This ensures the NAT rules are loaded before ufw's own rules
@@ -33,8 +33,8 @@ if [ -f /etc/ufw/before.rules ]; then
     echo "# Port forwarding for k0s NodePorts" >> /etc/ufw/before.rules
     echo "*nat" >> /etc/ufw/before.rules
     echo ":PREROUTING ACCEPT [0:0]" >> /etc/ufw/before.rules
-    echo "-A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3080" >> /etc/ufw/before.rules
-    echo "-A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 3443" >> /etc/ufw/before.rules
+    echo "-A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 30080" >> /etc/ufw/before.rules
+    echo "-A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 30443" >> /etc/ufw/before.rules
     echo "COMMIT" >> /etc/ufw/before.rules
 fi
 
@@ -42,8 +42,8 @@ fi
 ufw reload
 
 echo "Port forwarding rules set up using ufw:"
-echo "  80 -> 3080 (HTTP)"
-echo "  443 -> 3443 (HTTPS)"
+echo "  80 -> 30080 (HTTP)"
+echo "  443 -> 30443 (HTTPS)"
 
 # Display current NAT rules
 echo -e "\nCurrent NAT rules:"
