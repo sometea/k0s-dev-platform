@@ -6,7 +6,7 @@ k0s kubectl create namespace nginx-gateway
 k0s kubectl kustomize "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.6.7" | k0s kubectl apply -f -
 sleep 10
 k0s kubectl apply --server-side -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.6.7/deploy/crds.yaml
-kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.6.7/deploy/nodeport/deploy.yaml
+k0s kubectl apply -f https://raw.githubusercontent.com/nginx/nginx-gateway-fabric/v2.6.7/deploy/nodeport/deploy.yaml
 
 # Wait for NGINX Gateway Fabric to be ready
 while ! k0s kubectl get pods -n nginx-gateway | grep -q "1/1"; do
